@@ -1,0 +1,36 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        brew install glfw
+
+    - name: Build ZLATAN
+      run: |
+        clang++ -std=c++17 -O2 -Wall -Wextra \
+          -I/opt/homebrew/include -I/usr/local/include \
+          ZLATAN.cpp -o ZLATAN \
+          -L/opt/homebrew/lib -L/usr/local/lib \
+          -lglfw -framework OpenGL
+
+    - name: Verify binary
+      run: |
+        if [ -f ZLATAN ]; then
+          echo "✓ Build successful: ZLATAN binary created"
+          file ZLATAN
+        else
+          echo "✗ Build failed: ZLATAN binary not found"
+          exit 1
+        fi
