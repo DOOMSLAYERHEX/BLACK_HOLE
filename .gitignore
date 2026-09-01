@@ -1,0 +1,27 @@
+# Binaries
+ZLATAN
+*.o
+*.a
+*.so
+*.dylib
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build directories
+build/
+dist/
+cmake-build-debug/
+cmake-build-release/
+
+# Compiler outputs
+*.dSYM/
+
+# macOS
+.AppleDouble
+.LSOverride
